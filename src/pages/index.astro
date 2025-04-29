@@ -1,16 +1,349 @@
 ---
+import MainLayout from "../layouts/MainLayout.astro";
 
+// Mock data for featured articles
+const featuredArticles = [
+	{
+		id: 1,
+		title: "Building Scalable Web Applications with React and Node.js",
+		excerpt:
+			"Learn how to build scalable web applications using React for the frontend and Node.js for the backend.",
+		image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop",
+		author: {
+			name: "John Doe",
+			avatar: "https://randomuser.me/api/portraits/men/1.jpg",
+		},
+		date: "June 12, 2023",
+		tags: ["React", "Node.js", "Web Development"],
+	},
+	{
+		id: 2,
+		title: "Getting Started with TypeScript: A Comprehensive Guide",
+		excerpt:
+			"TypeScript is a powerful superset of JavaScript that adds static typing to the language. This guide will help you get started with TypeScript.",
+		image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
+		author: {
+			name: "Jane Smith",
+			avatar: "https://randomuser.me/api/portraits/women/1.jpg",
+		},
+		date: "May 28, 2023",
+		tags: ["TypeScript", "JavaScript", "Programming"],
+	},
+	{
+		id: 3,
+		title: "Mastering CSS Grid Layout: Tips and Tricks",
+		excerpt:
+			"CSS Grid Layout is a powerful tool for creating complex web layouts. Learn how to master it with these tips and tricks.",
+		image: "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?q=80&w=2070&auto=format&fit=crop",
+		author: {
+			name: "Mike Johnson",
+			avatar: "https://randomuser.me/api/portraits/men/2.jpg",
+		},
+		date: "April 15, 2023",
+		tags: ["CSS", "Web Design", "Frontend"],
+	},
+];
+
+// Mock data for authors
+const authors = [
+	{
+		id: 1,
+		name: "John Doe",
+		avatar: "https://randomuser.me/api/portraits/men/1.jpg",
+		bio: "Full Stack Developer with 5+ years of experience in React and Node.js",
+		articles: 24,
+	},
+	{
+		id: 2,
+		name: "Jane Smith",
+		avatar: "https://randomuser.me/api/portraits/women/1.jpg",
+		bio: "Frontend Developer specializing in TypeScript and React",
+		articles: 18,
+	},
+	{
+		id: 3,
+		name: "Mike Johnson",
+		avatar: "https://randomuser.me/api/portraits/men/2.jpg",
+		bio: "UI/UX Designer and CSS Expert",
+		articles: 15,
+	},
+	{
+		id: 4,
+		name: "Sarah Williams",
+		avatar: "https://randomuser.me/api/portraits/women/2.jpg",
+		bio: "Backend Developer with expertise in Node.js and MongoDB",
+		articles: 12,
+	},
+	{
+		id: 5,
+		name: "David Brown",
+		avatar: "https://randomuser.me/api/portraits/men/3.jpg",
+		bio: "DevOps Engineer and Cloud Architect",
+		articles: 9,
+	},
+];
+
+// Mock data for latest blogs
+const latestBlogs = [
+	{
+		id: 1,
+		title: "Introduction to Astro.js: The All-in-One Web Framework",
+		excerpt:
+			"Astro.js is a modern web framework that allows you to build faster websites with less client-side JavaScript.",
+		image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?q=80&w=2074&auto=format&fit=crop",
+		author: {
+			name: "John Doe",
+			avatar: "https://randomuser.me/api/portraits/men/1.jpg",
+		},
+		date: "June 20, 2023",
+		tags: ["Astro.js", "Web Development", "JavaScript"],
+	},
+	{
+		id: 2,
+		title: "Understanding React Hooks: A Deep Dive",
+		excerpt:
+			"React Hooks are a powerful feature that allows you to use state and other React features without writing a class.",
+		image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=2070&auto=format&fit=crop",
+		author: {
+			name: "Jane Smith",
+			avatar: "https://randomuser.me/api/portraits/women/1.jpg",
+		},
+		date: "June 18, 2023",
+		tags: ["React", "Hooks", "JavaScript"],
+	},
+	{
+		id: 3,
+		title: "Building RESTful APIs with Express.js",
+		excerpt:
+			"Express.js is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.",
+		image: "https://images.unsplash.com/photo-1654277041218-84424c78f0ae?q=80&w=2070&auto=format&fit=crop",
+		author: {
+			name: "Mike Johnson",
+			avatar: "https://randomuser.me/api/portraits/men/2.jpg",
+		},
+		date: "June 15, 2023",
+		tags: ["Express.js", "Node.js", "API"],
+	},
+	{
+		id: 4,
+		title: "CSS-in-JS: Styling React Components",
+		excerpt:
+			"CSS-in-JS is a styling technique where JavaScript is used to style components. Learn how to use it in your React applications.",
+		image: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=2070&auto=format&fit=crop",
+		author: {
+			name: "Sarah Williams",
+			avatar: "https://randomuser.me/api/portraits/women/2.jpg",
+		},
+		date: "June 10, 2023",
+		tags: ["CSS-in-JS", "React", "Styling"],
+	},
+	{
+		id: 5,
+		title: "Getting Started with Docker for Web Developers",
+		excerpt:
+			"Docker is a platform for developing, shipping, and running applications in containers. Learn how to use it in your web development workflow.",
+		image: "https://images.unsplash.com/photo-1605745341112-85968b19335b?q=80&w=2071&auto=format&fit=crop",
+		author: {
+			name: "David Brown",
+			avatar: "https://randomuser.me/api/portraits/men/3.jpg",
+		},
+		date: "June 5, 2023",
+		tags: ["Docker", "DevOps", "Web Development"],
+	},
+	{
+		id: 6,
+		title: "Introduction to GraphQL: A Better Way to API",
+		excerpt:
+			"GraphQL is a query language for your API, and a server-side runtime for executing queries by using a type system you define for your data.",
+		image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2070&auto=format&fit=crop",
+		author: {
+			name: "John Doe",
+			avatar: "https://randomuser.me/api/portraits/men/1.jpg",
+		},
+		date: "June 1, 2023",
+		tags: ["GraphQL", "API", "Web Development"],
+	},
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout title="Hamro Blog - A Developer Community Blog Platform">
+	<!-- Hero Section with Featured Articles -->
+	<section
+		class="py-12 md:py-20 bg-gradient-to-r from-primary/10 to-secondary/10"
+	>
+		<div class="container">
+			<div class="text-center mb-12">
+				<h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-4">
+					Developer Community Blog
+				</h1>
+				<p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+					A platform for developers to share their knowledge,
+					experiences, and insights with the community.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+				{
+					featuredArticles.map((article) => (
+						<div class="group relative overflow-hidden rounded-lg border bg-background shadow-md transition-all hover:shadow-xl">
+							<a
+								href={`/blogs/${article.id}`}
+								class="absolute inset-0 z-10"
+							/>
+							<div class="aspect-video overflow-hidden">
+								<img
+									src={article.image}
+									alt={article.title}
+									class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+								/>
+							</div>
+							<div class="p-6">
+								<div class="flex items-center gap-2 mb-3">
+									{article.tags.slice(0, 2).map((tag) => (
+										<span class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+											{tag}
+										</span>
+									))}
+								</div>
+								<h3 class="text-xl font-bold leading-tight mb-2 line-clamp-2">
+									{article.title}
+								</h3>
+								<p class="text-muted-foreground mb-4 line-clamp-2">
+									{article.excerpt}
+								</p>
+								<div class="flex items-center justify-between">
+									<div class="flex items-center gap-2">
+										<img
+											src={article.author.avatar}
+											alt={article.author.name}
+											class="h-8 w-8 rounded-full object-cover"
+										/>
+										<span class="text-sm font-medium">
+											{article.author.name}
+										</span>
+									</div>
+									<span class="text-xs text-muted-foreground">
+										{article.date}
+									</span>
+								</div>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- Author List Section -->
+	<section class="py-12 bg-muted/50">
+		<div class="container">
+			<div class="text-center mb-12">
+				<h2 class="text-3xl font-bold tracking-tight mb-4">
+					Meet Our Authors
+				</h2>
+				<p class="text-muted-foreground max-w-2xl mx-auto">
+					Learn from experienced developers who share their knowledge
+					and expertise.
+				</p>
+			</div>
+
+			<div
+				class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"
+			>
+				{
+					authors.map((author) => (
+						<div class="flex flex-col items-center text-center p-6 rounded-lg bg-background border shadow-sm hover:shadow-md transition-shadow">
+							<img
+								src={author.avatar}
+								alt={author.name}
+								class="h-24 w-24 rounded-full object-cover mb-4"
+							/>
+							<h3 class="text-lg font-medium mb-1">
+								{author.name}
+							</h3>
+							<p class="text-sm text-muted-foreground mb-3 line-clamp-2">
+								{author.bio}
+							</p>
+							<div class="text-xs text-muted-foreground">
+								{author.articles} Articles
+							</div>
+							<a
+								href={`/authors/${author.id}`}
+								class="mt-4 inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+							>
+								View Profile
+							</a>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- Latest Blogs Section -->
+	<section class="py-12">
+		<div class="container">
+			<div class="flex items-center justify-between mb-8">
+				<h2 class="text-3xl font-bold tracking-tight">
+					Latest Articles
+				</h2>
+				<a
+					href="/blogs"
+					class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+				>
+					View All
+				</a>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+				{
+					latestBlogs.map((blog) => (
+						<div class="group relative overflow-hidden rounded-lg border bg-background shadow-sm transition-all hover:shadow-md">
+							<a
+								href={`/blogs/${blog.id}`}
+								class="absolute inset-0 z-10"
+							/>
+							<div class="aspect-video overflow-hidden">
+								<img
+									src={blog.image}
+									alt={blog.title}
+									class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+								/>
+							</div>
+							<div class="p-6">
+								<div class="flex items-center gap-2 mb-3">
+									{blog.tags.slice(0, 2).map((tag) => (
+										<span class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+											{tag}
+										</span>
+									))}
+								</div>
+								<h3 class="text-xl font-bold leading-tight mb-2 line-clamp-2">
+									{blog.title}
+								</h3>
+								<p class="text-muted-foreground mb-4 line-clamp-2">
+									{blog.excerpt}
+								</p>
+								<div class="flex items-center justify-between">
+									<div class="flex items-center gap-2">
+										<img
+											src={blog.author.avatar}
+											alt={blog.author.name}
+											class="h-8 w-8 rounded-full object-cover"
+										/>
+										<span class="text-sm font-medium">
+											{blog.author.name}
+										</span>
+									</div>
+									<span class="text-xs text-muted-foreground">
+										{blog.date}
+									</span>
+								</div>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</MainLayout>
