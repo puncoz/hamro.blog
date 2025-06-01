@@ -1,4 +1,6 @@
 ---
+import Header from "../layouts/Header.astro";
+import Footer from "../layouts/Footer.astro";
 import "../styles/global.css";
 import siteData from "../data/site.json";
 
@@ -22,46 +24,8 @@ const { title = "", description = siteData.description } = Astro.props;
     </head>
     <body>
         <div class="flex min-h-screen flex-col">
-            <!-- Navigation -->
-            <header class="sticky top-0 z-40 w-full border-b bg-background">
-                <div
-                    class="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0"
-                >
-                    <div class="flex gap-6 md:gap-10">
-                        <a href="/" class="flex items-center space-x-2">
-                            <img
-                                src="/hamro-blog-logo.png"
-                                alt="hamro.blog Logo"
-                                class="h-10 w-auto"
-                            />
-                        </a>
-                    </div>
-                    <div class="flex flex-1 items-center justify-end space-x-4">
-                        <nav class="hidden gap-6 md:flex">
-                            <a
-                                href="/"
-                                class="flex items-center text-lg font-medium text-foreground/60 transition-colors hover:text-foreground/80"
-                                >Home</a
-                            >
-                            <a
-                                href="/blogs"
-                                class="flex items-center text-lg font-medium text-foreground/60 transition-colors hover:text-foreground/80"
-                                >Blogs</a
-                            >
-                            <a
-                                href="/authors"
-                                class="flex items-center text-lg font-medium text-foreground/60 transition-colors hover:text-foreground/80"
-                                >Authors</a
-                            >
-                            <a
-                                href="/about"
-                                class="flex items-center text-lg font-medium text-foreground/60 transition-colors hover:text-foreground/80"
-                                >About</a
-                            >
-                        </nav>
-                    </div>
-                </div>
-            </header>
+            <!-- Header -->
+            <Header />
 
             <!-- Main Content -->
             <main class="flex-1">
@@ -69,98 +33,7 @@ const { title = "", description = siteData.description } = Astro.props;
             </main>
 
             <!-- Footer -->
-            <footer class="border-t bg-background">
-                <div class="container py-8 md:py-12">
-                    <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
-                        <div class="space-y-4">
-                            <h3 class="text-lg font-medium">Hamro Blog</h3>
-                            <p class="text-sm text-muted-foreground">
-                                A developer community blog platform where
-                                developers can share their knowledge and
-                                experiences.
-                            </p>
-                        </div>
-                        <div class="space-y-4">
-                            <h3 class="text-lg font-medium">Links</h3>
-                            <ul class="space-y-2 text-sm">
-                                <li>
-                                    <a
-                                        href="/"
-                                        class="text-muted-foreground hover:text-foreground"
-                                        >Home</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        href="/blogs"
-                                        class="text-muted-foreground hover:text-foreground"
-                                        >Blogs</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        href="/authors"
-                                        class="text-muted-foreground hover:text-foreground"
-                                        >Authors</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        href="/about"
-                                        class="text-muted-foreground hover:text-foreground"
-                                        >About</a
-                                    >
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="space-y-4">
-                            <h3 class="text-lg font-medium">Legal</h3>
-                            <ul class="space-y-2 text-sm">
-                                <li>
-                                    <a
-                                        href="/privacy"
-                                        class="text-muted-foreground hover:text-foreground"
-                                        >Privacy Policy</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        href="/terms"
-                                        class="text-muted-foreground hover:text-foreground"
-                                        >Terms of Service</a
-                                    >
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="space-y-4">
-                            <h3 class="text-lg font-medium">
-                                Subscribe to our newsletter
-                            </h3>
-                            <form class="flex flex-col space-y-2">
-                                <input
-                                    type="email"
-                                    placeholder="Enter your email"
-                                    class="rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                                />
-                                <button
-                                    type="submit"
-                                    class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90"
-                                >
-                                    Subscribe
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                    <div
-                        class="mt-8 border-t pt-8 text-center text-sm text-muted-foreground"
-                    >
-                        <p>
-                            &copy; {new Date().getFullYear()} Hamro Blog. All rights
-                            reserved.
-                        </p>
-                    </div>
-                </div>
-            </footer>
+            <Footer />
         </div>
     </body>
 </html>

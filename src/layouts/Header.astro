@@ -1,0 +1,54 @@
+---
+const currentPath = Astro.url.pathname;
+
+// Function to check if a path is active
+const isActive = (path: string) => {
+    if (path === "/" && currentPath === "/") return true;
+    if (path !== "/" && currentPath.startsWith(path)) return true;
+    return false;
+};
+
+// Function to get the class for navigation links
+const getNavLinkClass = (path: string) => {
+    const baseClass = "flex items-center text-lg font-medium transition-colors";
+    const activeClass = "text-primary";
+    const inactiveClass = "text-foreground/60 hover:text-foreground/80";
+
+    return `${baseClass} ${isActive(path) ? activeClass : inactiveClass}`;
+};
+
+// Function to get the class for footer links
+const getFooterLinkClass = (path: string) => {
+    const baseClass = "hover:text-foreground";
+    const activeClass = "text-primary";
+    const inactiveClass = "text-muted-foreground";
+
+    return `${baseClass} ${isActive(path) ? activeClass : inactiveClass}`;
+};
+---
+
+<header class="sticky top-0 z-40 w-full border-b bg-background">
+    <div
+        class="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0"
+    >
+        <div class="flex gap-6 md:gap-10">
+            <a href="/" class="flex items-center space-x-2">
+                <img
+                    src="/hamro-blog-logo.png"
+                    alt="hamro.blog Logo"
+                    class="h-10 w-auto"
+                />
+            </a>
+        </div>
+        <div class="flex flex-1 items-center justify-end space-x-4">
+            <nav class="hidden gap-6 md:flex">
+                <a href="/" class={getNavLinkClass("/")}>Home</a>
+                <a href="/blogs" class={getNavLinkClass("/blogs")}>Blogs</a>
+                <a href="/authors" class={getNavLinkClass("/authors")}
+                    >Authors</a
+                >
+                <a href="/about" class={getNavLinkClass("/about")}>About</a>
+            </nav>
+        </div>
+    </div>
+</header>

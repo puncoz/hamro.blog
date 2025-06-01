@@ -1,0 +1,84 @@
+---
+import siteData from "../data/site.json";
+---
+
+<footer class="border-t bg-background">
+    <div class="container py-8 md:py-12">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+            <div class="space-y-4">
+                <h3 class="text-lg font-medium">{siteData.name}</h3>
+                <p class="text-sm text-muted-foreground">
+                    {siteData.description}
+                </p>
+            </div>
+            <div class="space-y-4">
+                <h3 class="text-lg font-medium">Links</h3>
+                <ul class="space-y-2 text-sm">
+                    {
+                        Object.entries(siteData.links.footer).map(
+                            ([key, link]) => (
+                                <li>
+                                    <a
+                                        href={link.url}
+                                        class="text-muted-foreground hover:text-foreground"
+                                    >
+                                        {link.title}
+                                    </a>
+                                </li>
+                            ),
+                        )
+                    }
+                </ul>
+            </div>
+
+            <div class="space-y-4">
+                <h3 class="text-lg font-medium">Legal</h3>
+                <ul class="space-y-2 text-sm">
+                    {
+                        Object.entries(siteData.links.legal).map(
+                            ([key, link]) => (
+                                <li>
+                                    <a
+                                        href={link.url}
+                                        class="text-muted-foreground hover:text-foreground"
+                                    >
+                                        {link.title}
+                                    </a>
+                                </li>
+                            ),
+                        )
+                    }
+                </ul>
+            </div>
+            <div class="space-y-4">
+                <h3 class="text-lg font-medium">Subscribe to our newsletter</h3>
+                <form class="flex flex-col space-y-2">
+                    <input
+                        type="email"
+                        placeholder="Enter your email"
+                        class="rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    />
+                    <button
+                        type="submit"
+                        class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90"
+                    >
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div
+            class="mt-8 border-t pt-8 text-center text-sm text-muted-foreground"
+        >
+            <p>
+                &copy; {
+                    new Date().getFullYear() === 2025
+                        ? "2025"
+                        : `2025 - ${new Date().getFullYear()}`
+                }
+                {siteData.name} | All rights reserved. | Made with ❤️ by {" "}
+                <a href="https://nepal-dev.com"> nepal-dev.com </a>
+            </p>
+        </div>
+    </div>
+</footer>
