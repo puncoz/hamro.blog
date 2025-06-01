@@ -1,15 +1,13 @@
 ---
 import "../styles/global.css";
+import siteData from "../data/site.json";
 
 interface Props {
     title?: string;
     description?: string;
 }
 
-const {
-    title = "Hamro Blog - A Developer Community Blog Platform",
-    description = "A blog platform for developers community where developers can post their blogs or excerpts linking with their original site.",
-} = Astro.props;
+const { title = "", description = siteData.description } = Astro.props;
 ---
 
 <!doctype html>
@@ -20,7 +18,7 @@ const {
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="description" content={description} />
         <meta name="generator" content={Astro.generator} />
-        <title>{title}</title>
+        <title>{title ? `${title} | ${siteData.title}` : siteData.title}</title>
     </head>
     <body>
         <div class="flex min-h-screen flex-col">
@@ -32,8 +30,8 @@ const {
                     <div class="flex gap-6 md:gap-10">
                         <a href="/" class="flex items-center space-x-2">
                             <img
-                                src="/logo.svg"
-                                alt="Hamro Blog Logo"
+                                src="/hamro-blog-logo.png"
+                                alt="hamro.blog Logo"
                                 class="h-10 w-auto"
                             />
                         </a>
