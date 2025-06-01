@@ -35,6 +35,8 @@ const { title = "", description = siteData.description } = Astro.props;
                                 class="h-10 w-auto"
                             />
                         </a>
+                    </div>
+                    <div class="flex flex-1 items-center justify-end space-x-4">
                         <nav class="hidden gap-6 md:flex">
                             <a
                                 href="/"
@@ -57,20 +59,6 @@ const { title = "", description = siteData.description } = Astro.props;
                                 >About</a
                             >
                         </nav>
-                    </div>
-                    <div class="flex flex-1 items-center justify-end space-x-4">
-                        <div class="flex items-center space-x-1">
-                            <a
-                                href="/login"
-                                class="px-4 py-2 text-sm font-medium text-foreground/60 transition-colors hover:text-foreground/80"
-                                >Login</a
-                            >
-                            <a
-                                href="/register"
-                                class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90"
-                                >Sign Up</a
-                            >
-                        </div>
                     </div>
                 </div>
             </header>
